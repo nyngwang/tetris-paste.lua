@@ -93,7 +93,7 @@ function M.main()
   local i = 0
   while i <= move_y do
     move_floating_window(win_id, config.relative, config.row + i + 1, config.col)
-    vim.nvim_eval('sleep 10ms')
+    vim.cmd('sleep 10ms')
     i = i + 1
   end
 
