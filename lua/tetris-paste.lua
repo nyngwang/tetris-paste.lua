@@ -20,7 +20,7 @@ local function create_window(config)
   local win_id = vim.api.nvim_open_win(buf, true, config)
   vim.cmd('hi mycolor guifg=#ffffff guibg=#dd6900')
   vim.api.nvim_win_set_option(win_id, 'winhighlight', 'Normal:mycolor')
-  vim.api.nvim_win_set_option(win_id, 'winlend', 40)
+  vim.api.nvim_win_set_option(win_id, 'winblend', 40)
   return win_id
 end
 
