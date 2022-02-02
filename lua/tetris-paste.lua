@@ -56,7 +56,7 @@ end
 local function insert_empty_line(row)
     local i = 0
     while i < row do
-      vim.api.nvim_eval("call append(expand('.'), '')")
+      vim.cmd("call append(expand('.'), '')")
       i = i + 1
     end
 end
