@@ -116,7 +116,11 @@ function M.main()
 
   paste_to_current_window(height)
 
+  local cur_cur = vim.api.nvim_win_get_cursor(0)
+
   delete_empty_line(height)
+
+  vim.api.nvim_win_set_cursor(cur_cur)
 
   vim.api.nvim_win_close(win_id, true)
 end
