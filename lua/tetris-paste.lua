@@ -37,7 +37,7 @@ end
 
 local function get_col()
   if not vim.o.number then return 0 end
-  return vim.fn.line('$') + 1
+  return vim.api.nvim_win_get_cursor(0)[2] + 1
 end
 
 local function get_width()
@@ -48,11 +48,12 @@ local function get_height()
   return #vim.fn.split(vim.fn.getreg('@*'), '\n')
 end
 
+local function is_inline()
+  return not vim.fn.getreg('@*'):match('\n')
+end
+
 local function paste_to_current_window(number_of_line)
-    if not vim.fn.getreg('@*'):match('\n') then
-      vim.cmd('normal! p')
-      return
-    end
+    if is_inline then vim.cmd('normal! p') return end
     if number_of_line == 1 then
       vim.fn.setreg('@*', vim.fn.substitute(vim.fn.getreg('@*'),'\n', '', 'g') .. '\n')
     end
@@ -100,7 +101,7 @@ function M.main()
   vim.cmd("0windo :")
 
   -- " floating windowを上から降らす
-  local move_y = vim.fn.line('.') - vim.fn.line('w0') - start_row + 1
+  local move_y = vim.fn.line('.') - vim.fn.line('w0') - start_row + (not is_inline() and 1 or 0)
   local i = 0
   while i <= move_y do
     move_floating_window(win_id, config.relative, config.row + i + 1, config.col)
