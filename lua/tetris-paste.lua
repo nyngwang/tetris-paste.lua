@@ -120,7 +120,7 @@ function M.main()
 
   delete_empty_line(height)
 
-  vim.api.nvim_win_set_cursor(cur_cur)
+  vim.api.nvim_win_set_cursor(0, cur_cur)
 
   vim.api.nvim_win_close(win_id, true)
 end
