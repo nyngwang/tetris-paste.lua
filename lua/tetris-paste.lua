@@ -6,6 +6,10 @@ local EXPR_NOREF_NOERR_TRUNC = { expr = true, noremap = true, silent = true, now
 local M = {}
 
 
+local function is_inline()
+  return not vim.fn.getreg('@*'):match('\n')
+end
+
 local function move_floating_window(win_id, relative, row, col)
   local newConfig = {
     relative = relative,
@@ -47,10 +51,6 @@ end
 
 local function get_height()
   return #vim.fn.split(vim.fn.getreg('@*'), '\n')
-end
-
-local function is_inline()
-  return not vim.fn.getreg('@*'):match('\n')
 end
 
 local function paste_to_current_window(number_of_line)
