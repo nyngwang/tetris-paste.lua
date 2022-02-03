@@ -5,6 +5,7 @@ local EXPR_NOREF_NOERR_TRUNC = { expr = true, noremap = true, silent = true, now
 
 local M = {}
 M.delay_ms = 10
+M.offset = 10
 
 local function move_floating_window(win_id, relative, row, col)
   local newConfig = {
@@ -70,6 +71,7 @@ end
 ---------------------------------------------------------------------------------------------------
 function M.setup(opts)
   M.delay_ms = opts.delay_ms
+  M.offset = opts.offset
 end
 
 function M.main()
