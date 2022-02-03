@@ -40,16 +40,16 @@ local function get_col()
 end
 
 local function get_width()
-  return string.len(vim.fn.getreg('*'))
+  return string.len(vim.fn.getreg('@*'))
 end
 
 local function get_height()
-  return #vim.fn.split(vim.fn.getreg('*'), '\n')
+  return #vim.fn.split(vim.fn.getreg('@*'), '\n')
 end
 
 local function paste_to_current_window(number_of_line)
     if number_of_line == 1 then
-      vim.fn.setreg('*', vim.fn.substitute(vim.fn.getreg('*'),'\n', '', 'g') .. '\n')
+      vim.fn.setreg('@*', vim.fn.substitute(vim.fn.getreg('@*'),'\n', '', 'g') .. '\n')
     end
     vim.cmd('normal! p')
 end
