@@ -9,6 +9,11 @@ so NeoVim users can also play with it. Works nicely on nightly.
 
 https://user-images.githubusercontent.com/24765272/152363153-6f0c542e-0ea0-4eea-b34f-73644b34c5eb.mov
 
+Inline
+
+https://user-images.githubusercontent.com/24765272/152428612-a7b219d2-ee60-463c-89d9-adba4df9a339.mov
+
+
 ## Usage (packer.nvim)
 
 ```lua
