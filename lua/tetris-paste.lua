@@ -90,7 +90,7 @@ function M.main()
   vim.cmd("0windo :")
 
   -- " floating windowを上から降らす
-  local move_y = vim.fn.line('.') - vim.fn.line('w0') - start_row
+  local move_y = vim.fn.line('.') - vim.fn.line('w0') - start_row + 1
   local i = 0
   while i <= move_y do
     move_floating_window(win_id, config.relative, config.row + i + 1, config.col)
