@@ -4,6 +4,7 @@ local EXPR_NOREF_NOERR_TRUNC = { expr = true, noremap = true, silent = true, now
 ---------------------------------------------------------------------------------------------------
 
 local M = {}
+M.delay_ms = 10
 
 local function move_floating_window(win_id, relative, row, col)
   local newConfig = {
@@ -20,7 +21,7 @@ local function create_window(config)
   local win_id = vim.api.nvim_open_win(buf, true, config)
   vim.cmd('hi mycolor guifg=#ffffff guibg=#dd6900')
 
-  vim.api.nvim_win_set_option(win_id, 'winhighlight', 'Normal:mycolor')
+  vim.api.nvim_win_set_option(win_id, 'winhighlight', 'TetrisBlock:mycolor')
   vim.api.nvim_win_set_option(win_id, 'winblend', 40)
   return win_id
 end
@@ -68,6 +69,10 @@ local function delete_empty_line(row)
   vim.cmd('normal! ' .. row ..'k')
 end
 ---------------------------------------------------------------------------------------------------
+function M.setup(opts)
+  M.delay_ms = opts.delay_ms
+end
+
 function M.main()
   local start_row = 10
   local col = get_col()
@@ -94,7 +99,7 @@ function M.main()
   local i = 0
   while i <= move_y do
     move_floating_window(win_id, config.relative, config.row + i + 1, config.col)
-    vim.cmd('sleep 10ms')
+    vim.cmd('sleep '..M.delay_ms..'ms')
     i = i + 1
   end
 
