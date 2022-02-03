@@ -49,6 +49,10 @@ local function get_height()
 end
 
 local function paste_to_current_window(number_of_line)
+    if not vim.fn.getreg('@*'):match('\n') then
+      vim.cmd('normal! p')
+      return
+    end
     if number_of_line == 1 then
       vim.fn.setreg('@*', vim.fn.substitute(vim.fn.getreg('@*'),'\n', '', 'g') .. '\n')
     end
