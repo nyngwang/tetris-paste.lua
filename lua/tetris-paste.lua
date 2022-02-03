@@ -35,7 +35,7 @@ local function transparency_window(win_id)
 end
 
 local function get_col()
-  return vim.api.nvim_win_get_cursor(0)[2]
+  return vim.api.nvim_win_get_cursor(0)[2] - 1
     + M.signs_width
     + (vim.o.number and vim.o.numberwidth or 0)
 end
