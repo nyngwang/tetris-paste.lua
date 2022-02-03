@@ -6,6 +6,7 @@ local EXPR_NOREF_NOERR_TRUNC = { expr = true, noremap = true, silent = true, now
 local M = {}
 M.delay_ms = 10
 M.offset = 10
+M.signs_width = 2
 
 local function move_floating_window(win_id, relative, row, col)
   local newConfig = {
@@ -36,8 +37,9 @@ local function transparency_window(win_id)
 end
 
 local function get_col()
-  if not vim.o.number then return 0 end
-  return vim.api.nvim_win_get_cursor(0)[2] + 1
+  return vim.api.nvim_win_get_cursor(0)[2]
+    + M.signs_width
+    + (vim.o.number and vim.o.numberwidth or 0)
 end
 
 local function get_width()
@@ -77,6 +79,7 @@ end
 function M.setup(opts)
   M.delay_ms = opts.delay_ms
   M.offset = opts.offset
+  M.signs_width = opts.signs_width
 end
 
 function M.main()
