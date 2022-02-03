@@ -19,9 +19,9 @@ end
 local function create_window(config)
   local buf = vim.api.nvim_create_buf(false, true)
   local win_id = vim.api.nvim_open_win(buf, true, config)
-  vim.cmd('hi mycolor guifg=#ffffff guibg=#dd6900')
+  vim.cmd('hi TetrisBlock guifg=#ffffff guibg=#dd6900')
 
-  vim.api.nvim_win_set_option(win_id, 'winhighlight', 'TetrisBlock:mycolor')
+  vim.api.nvim_win_set_option(win_id, 'winhighlight', 'Normal:TetrisBlock')
   vim.api.nvim_win_set_option(win_id, 'winblend', 40)
   return win_id
 end
