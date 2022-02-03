@@ -81,7 +81,7 @@ function M.setup(opts)
 end
 
 function M.main()
-  local start_row = 10
+  local start_row = 1
   local col = get_col()
   local width = get_width()
   local height = get_height()
