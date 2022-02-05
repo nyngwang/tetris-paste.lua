@@ -40,6 +40,7 @@ end
 
 local function get_col()
   return (is_inline() and vim.api.nvim_win_get_cursor(0)[2]+1 or 0)
+    + (vim.fn.getwininfo(vim.api.nvim_get_current_win())[1].wincol - 3)
     + M.signs_width
     + (vim.o.number and vim.o.numberwidth or 0)
 end
@@ -53,7 +54,6 @@ local function get_height()
 end
 
 local function paste_to_current_window(number_of_line)
-  vim.api.nvim_set_current_win(cur_win)
   if is_inline then vim.cmd('normal! p') return end
   if number_of_line == 1 then
     vim.fn.setreg('@*', vim.fn.substitute(vim.fn.getreg('@*'),'\n', '', 'g') .. '\n')
