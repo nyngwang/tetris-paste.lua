@@ -40,7 +40,7 @@ end
 
 local function get_col()
   return (is_inline() and vim.api.nvim_win_get_cursor(0)[2]+1 or 0)
-    + (vim.fn.getwininfo(vim.api.nvim_get_current_win())[1].wincol - 3)
+    + (vim.fn.getwininfo(vim.api.nvim_get_current_win())[1].wincol - 1)
     + M.signs_width
     + (vim.o.number and vim.o.numberwidth or 0)
 end
