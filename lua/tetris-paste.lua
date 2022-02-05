@@ -52,21 +52,21 @@ local function get_height()
   return #vim.fn.split(vim.fn.getreg('@*'), '\n')
 end
 
-local function paste_to_current_window(cur_win, number_of_line)
+local function paste_to_current_window(number_of_line)
   vim.api.nvim_set_current_win(cur_win)
-    if is_inline then vim.cmd('normal! p') return end
-    if number_of_line == 1 then
-      vim.fn.setreg('@*', vim.fn.substitute(vim.fn.getreg('@*'),'\n', '', 'g') .. '\n')
-    end
-    vim.cmd('normal! p')
+  if is_inline then vim.cmd('normal! p') return end
+  if number_of_line == 1 then
+    vim.fn.setreg('@*', vim.fn.substitute(vim.fn.getreg('@*'),'\n', '', 'g') .. '\n')
+  end
+  vim.cmd('normal! p')
 end
 
 local function insert_empty_line(row)
-    local i = 0
-    while i < row do
-      vim.cmd("call append(expand('.'), '')")
-      i = i + 1
-    end
+  local i = 0
+  while i < row do
+    vim.cmd("call append(expand('.'), '')")
+    i = i + 1
+  end
 end
 
 local function delete_empty_line(row)
@@ -103,6 +103,7 @@ function M.main()
 
   vim.cmd("normal! P")
   vim.cmd("0windo :")
+  vim.api.nvim_set_current_win(cur_win)
 
   -- " floating windowを上から降らす
   local move_y = vim.fn.line('.') - vim.fn.line('w0') - start_row + (not is_inline() and 1 or 0)
@@ -117,7 +118,7 @@ function M.main()
 
   transparency_window(win_id)
 
-  paste_to_current_window(cur_win, height)
+  paste_to_current_window(height)
 
   local cur_cur = vim.api.nvim_win_get_cursor(0)
 
