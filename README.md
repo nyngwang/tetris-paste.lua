@@ -10,6 +10,7 @@ with some enhencements, including:
 - inline-paste
 - delay-tuning
 - correct calculation on line-number / git-sign toggled
+- correct calculation on multiple v-split
 
 ## Install
 
