@@ -81,6 +81,7 @@ function M.setup(opts)
 end
 
 function M.main()
+  if not vim.bo.modifiable then return end
   local start_row = 1
   local col = get_col()
   local width = get_width()
