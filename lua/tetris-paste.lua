@@ -52,7 +52,8 @@ local function get_height()
   return #vim.fn.split(vim.fn.getreg('@*'), '\n')
 end
 
-local function paste_to_current_window(number_of_line)
+local function paste_to_current_window(cur_win, number_of_line)
+  vim.api.nvim_set_current_win(cur_win)
     if is_inline then vim.cmd('normal! p') return end
     if number_of_line == 1 then
       vim.fn.setreg('@*', vim.fn.substitute(vim.fn.getreg('@*'),'\n', '', 'g') .. '\n')
@@ -82,6 +83,7 @@ end
 
 function M.main()
   if not vim.bo.modifiable then return end
+  local cur_win = vim.api.nvim_get_current_win()
   local start_row = 1
   local col = get_col()
   local width = get_width()
@@ -115,7 +117,7 @@ function M.main()
 
   transparency_window(win_id)
 
-  paste_to_current_window(height)
+  paste_to_current_window(cur_win, height)
 
   local cur_cur = vim.api.nvim_win_get_cursor(0)
 
